@@ -7,3 +7,6 @@
 
 ;; php
 (add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
+
+;; ActionScript
+(add-to-list 'auto-mode-alist '("\\.as$" . actionscript-mode))
