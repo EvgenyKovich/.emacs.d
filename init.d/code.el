@@ -1,3 +1,4 @@
+
 ;; clojure
 ;;(defun turn-on-paredit () (paredit-mode 1))
 ;;(add-hook 'clojure-mode-hook 'turn-on-paredit)
@@ -10,3 +11,9 @@
 
 ;; ActionScript
 (add-to-list 'auto-mode-alist '("\\.as$" . actionscript-mode))
+
+;; Java
+(add-hook 'java-mode-hook (lambda ()
+                            (setq c-basic-offset 2
+                                  tab-width 2
+                                  indent-tab-mode nil)))

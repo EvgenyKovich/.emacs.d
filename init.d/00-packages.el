@@ -34,12 +34,15 @@
                :url "git://github.com/ejmr/php-mode.git")
         (:name actionscript-mode
                :type git
-               :url "git://github.com/austinhaas/actionscript-mode.git")))
+               :url "git://github.com/austinhaas/actionscript-mode.git")
+        (:name jade-mode
+               :type git
+               :url "git://github.com/brianc/jade-mode.git")))
 
 (setq my-packages
       (append
        '(clojure-mode nrepl color-theme-solarized paredit rainbow-delimiters php-mode
-                      actionscript-mode)
+                      actionscript-mode jade-mode)
        (mapcar 'el-get-source-name el-get-sources)))
 
 (el-get 'sync my-packages)
