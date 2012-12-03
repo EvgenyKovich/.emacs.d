@@ -17,3 +17,7 @@
                             (setq c-basic-offset 2
                                   tab-width 2
                                   indent-tab-mode nil)))
+
+;; Ruby
+(add-to-list 'auto-mode-alist '("Gemfile" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Rakefile" . ruby-mode))
