@@ -16,4 +16,3 @@
 ;; save customizations in a separate file
 (setq custom-file "~/.emacs.d/customizations.el")
 (load custom-file)
-

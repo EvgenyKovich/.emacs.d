@@ -52,7 +52,7 @@
       (append
        '(clojure-mode nrepl color-theme-solarized paredit rainbow-delimiters php-mode
                       actionscript-mode jade-mode coffee-mode markdown-mode
-                      yaml-mode)
+                      yaml-mode sml-mode)
        (mapcar 'el-get-source-name el-get-sources)))
 
 (el-get 'sync my-packages)
