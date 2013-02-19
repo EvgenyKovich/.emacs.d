@@ -46,13 +46,19 @@
                :url "git://jblevins.org/git/markdown-mode.git")
         (:name yaml-mode
                :type git
-               :url "git://github.com/yoshiki/yaml-mode.git")))
+               :url "git://github.com/yoshiki/yaml-mode.git")
+        (:name rvm
+               :type git
+               :url "git://github.com/senny/rvm.el.git")
+        (:name magit
+               :type git
+               :url "git://github.com/magit/magit.git")))
 
 (setq my-packages
       (append
        '(clojure-mode nrepl color-theme-solarized paredit rainbow-delimiters php-mode
                       actionscript-mode jade-mode coffee-mode markdown-mode
-                      yaml-mode sml-mode)
+                      yaml-mode sml-mode rvm magit)
        (mapcar 'el-get-source-name el-get-sources)))
 
 (el-get 'sync my-packages)
