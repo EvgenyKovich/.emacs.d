@@ -56,9 +56,9 @@
 
 (setq my-packages
       (append
-       '(clojure-mode nrepl color-theme-solarized paredit rainbow-delimiters php-mode
-                      actionscript-mode jade-mode coffee-mode markdown-mode
-                      yaml-mode sml-mode rvm magit)
+       '(clojure-mode nrepl color-theme-solarized paredit
+                      rainbow-delimiters php-mode actionscript-mode jade-mode
+                      coffee-mode markdown-mode yaml-mode sml-mode rvm magit)
        (mapcar 'el-get-source-name el-get-sources)))
 
 (el-get 'sync my-packages)

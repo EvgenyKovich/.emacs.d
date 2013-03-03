@@ -1,4 +1,3 @@
-
 ;; clojure
 ;;(defun turn-on-paredit () (paredit-mode 1))
 ;;(add-hook 'clojure-mode-hook 'turn-on-paredit)
@@ -21,6 +20,9 @@
 ;; Ruby
 (add-to-list 'auto-mode-alist '("Gemfile" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Rakefile" . ruby-mode))
+
+;; ClojureScript
+(add-to-list 'auto-mode-alist '("\\.cljs" . clojure-mode))
 
 ;; cleanup trailing whitespace
 (setq whitespace-action '(auto-cleanup)) ;; automatically clean up bad whitespace
