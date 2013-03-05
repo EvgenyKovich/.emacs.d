@@ -17,6 +17,9 @@
 ;; enable rainbow delimiters in nrepl
 (add-hook 'nrepl-mode-hook 'rainbow-delimiters-mode)
 
+;; add paredit to clojure-mode
+(add-hook 'clojure-mode-hook 'paredit-mode)
+
 ;; Teach compile the syntax of the kibit output
 (require 'compile)
 (add-to-list 'compilation-error-regexp-alist-alist
