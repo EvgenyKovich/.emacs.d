@@ -28,3 +28,8 @@
 (setq whitespace-action '(auto-cleanup)) ;; automatically clean up bad whitespace
 (setq whitespace-style '(trailing space-before-tab indentation empty space-after-tab)) ;; only show bad whitespace
 (global-whitespace-mode t)
+
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward
+      uniquify-after-kill-buffer-p t ; reorganize buffer names after a buffer has been killed
+      uniquify-ignore-buffers-re "^\\*")
