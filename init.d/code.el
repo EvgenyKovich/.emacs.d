@@ -25,6 +25,9 @@
 ;; ClojureScript
 (add-to-list 'auto-mode-alist '("\\.cljs" . clojure-mode))
 
+;; YAML
+(add-to-list 'auto-mode-alist '("\\.conf.tmpl" . yaml-mode))
+
 ;; cleanup trailing whitespace
 (setq whitespace-action '(auto-cleanup)) ;; automatically clean up bad whitespace
 (setq whitespace-style '(trailing space-before-tab indentation empty space-after-tab)) ;; only show bad whitespace
