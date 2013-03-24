@@ -18,15 +18,25 @@
                                   indent-tab-mode nil)))
 
 ;; Ruby
-(add-to-list 'auto-mode-alist '("Gemfile" . ruby-mode))
-(add-to-list 'auto-mode-alist '("Rakefile" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.gemspec" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Gemfile$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.gemspec$" . ruby-mode))
 
 ;; ClojureScript
-(add-to-list 'auto-mode-alist '("\\.cljs" . clojure-mode))
+(add-to-list 'auto-mode-alist '("\\.cljs$" . clojure-mode))
 
 ;; YAML
-(add-to-list 'auto-mode-alist '("\\.conf.tmpl" . yaml-mode))
+(add-to-list 'auto-mode-alist '("\\.conf.tmpl$" . yaml-mode))
+
+;; Markdown
+(add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
+
+;; Go
+(if (file-exists-p "/usr/local/opt/go/misc/emacs/go-mode-load.el")
+    (progn
+      (setq load-path (cons "/usr/local/opt/go/misc/emacs" load-path))
+      (require 'go-mode-load)
+      (add-to-list 'auto-mode-alist '("\\.go$" . go-mode))))
 
 ;; cleanup trailing whitespace
 (setq whitespace-action '(auto-cleanup)) ;; automatically clean up bad whitespace
