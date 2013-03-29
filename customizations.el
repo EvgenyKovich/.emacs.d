@@ -14,6 +14,7 @@
  '(js-enabled-frameworks (quote (javascript)))
  '(js-indent-level 2)
  '(mark-even-if-inactive nil)
+ '(markdown-command "mmd")
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
  '(standard-indent 2)

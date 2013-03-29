@@ -52,13 +52,17 @@
                :url "git://github.com/senny/rvm.el.git")
         (:name magit
                :type git
-               :url "git://github.com/magit/magit.git")))
+               :url "git://github.com/magit/magit.git")
+        (:name scala-mode2
+               :type git
+               :url "git://github.com/hvesalai/scala-mode2.git")))
 
 (setq my-packages
       (append
        '(clojure-mode nrepl color-theme-solarized paredit
                       rainbow-delimiters php-mode actionscript-mode jade-mode
-                      coffee-mode markdown-mode yaml-mode sml-mode rvm magit)
+                      coffee-mode markdown-mode yaml-mode sml-mode rvm magit
+                      scala-mode2)
        (mapcar 'el-get-source-name el-get-sources)))
 
 (el-get 'sync my-packages)
