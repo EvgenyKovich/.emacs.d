@@ -38,6 +38,9 @@
       (require 'go-mode-load)
       (add-to-list 'auto-mode-alist '("\\.go$" . go-mode))))
 
+;; Zsh
+(add-to-list 'auto-mode-alist '("\\.zsh$" . sh-mode))
+
 ;; cleanup trailing whitespace
 (setq whitespace-action '(auto-cleanup)) ;; automatically clean up bad whitespace
 (setq whitespace-style '(trailing space-before-tab indentation empty space-after-tab)) ;; only show bad whitespace
