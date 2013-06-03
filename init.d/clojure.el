@@ -33,3 +33,6 @@
 Display the results in a hyperlinked *compilation* buffer."
   (interactive)
   (compile "lein kibit"))
+
+;; add midje
+(add-hook 'clojure-mode-hook 'midje-mode)

@@ -13,9 +13,9 @@
 
 ;; Java
 (add-hook 'java-mode-hook (lambda ()
-                            (setq c-basic-offset 2
-                                  tab-width 2
-                                  indent-tab-mode nil)))
+			    (setq c-basic-offset 2
+				  tab-width 2
+				  indent-tab-mode nil)))
 
 ;; Ruby
 (add-to-list 'auto-mode-alist '("Gemfile$" . ruby-mode))
@@ -50,3 +50,7 @@
 (setq uniquify-buffer-name-style 'forward
       uniquify-after-kill-buffer-p t ; reorganize buffer names after a buffer has been killed
       uniquify-ignore-buffers-re "^\\*")
+
+;; elixir stuff
+(require 'elixir-mode-setup)
+(elixir-mode-setup)

@@ -13,6 +13,9 @@
       '((:name clojure-mode
                :type git
                :url "git://github.com/technomancy/clojure-mode.git")
+        (:name midje-mode
+               :type git
+               :url "git://github.com/dnaumov/midje-mode.git")
         (:name nrepl
                :type git
                :url "git://github.com/kingtim/nrepl.el.git")
@@ -55,14 +58,17 @@
                :url "git://github.com/magit/magit.git")
         (:name scala-mode2
                :type git
-               :url "git://github.com/hvesalai/scala-mode2.git")))
+               :url "git://github.com/hvesalai/scala-mode2.git")
+        (:name elixir-mode
+               :type git
+               :url "git://github.com/elixir-lang/emacs-elixir.git")))
 
 (setq my-packages
       (append
-       '(clojure-mode nrepl color-theme-solarized paredit
+       '(clojure-mode midje-mode nrepl color-theme-solarized paredit
                       rainbow-delimiters php-mode actionscript-mode jade-mode
                       coffee-mode markdown-mode yaml-mode sml-mode rvm magit
-                      scala-mode2)
+                      scala-mode2 elixir-mode)
        (mapcar 'el-get-source-name el-get-sources)))
 
 (el-get 'sync my-packages)
