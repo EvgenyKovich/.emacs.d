@@ -13,9 +13,9 @@
 
 ;; Java
 (add-hook 'java-mode-hook (lambda ()
-			    (setq c-basic-offset 2
-				  tab-width 2
-				  indent-tab-mode nil)))
+          (setq c-basic-offset 2
+          tab-width 2
+          indent-tab-mode nil)))
 
 ;; Ruby
 (add-to-list 'auto-mode-alist '("Gemfile$" . ruby-mode))
@@ -54,3 +54,13 @@
 ;; elixir stuff
 (require 'elixir-mode-setup)
 (elixir-mode-setup)
+
+;; Multi-Term stuff
+(setq multi-term-program "/bin/zsh")
+(setq term-term-name "xterm-256color")
+(set-terminal-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+(add-hook 'term-mode-hook
+          (lambda ()
+            (define-key term-raw-map (kbd "C-y") 'term-paste)
+            (define-key term-raw-map (kbd "s-v") 'term-paste)))

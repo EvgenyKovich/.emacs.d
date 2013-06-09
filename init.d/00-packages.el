@@ -61,14 +61,17 @@
                :url "git://github.com/hvesalai/scala-mode2.git")
         (:name elixir-mode
                :type git
-               :url "git://github.com/elixir-lang/emacs-elixir.git")))
+               :url "git://github.com/elixir-lang/emacs-elixir.git")
+        (:name multi-term
+               :type git
+               :url "git://github.com/emacsmirror/multi-term.git")))
 
 (setq my-packages
       (append
        '(clojure-mode midje-mode nrepl color-theme-solarized paredit
                       rainbow-delimiters php-mode actionscript-mode jade-mode
                       coffee-mode markdown-mode yaml-mode sml-mode rvm magit
-                      scala-mode2 elixir-mode)
+                      scala-mode2 elixir-mode multi-term)
        (mapcar 'el-get-source-name el-get-sources)))
 
 (el-get 'sync my-packages)
