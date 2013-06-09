@@ -7,6 +7,8 @@
  '(custom-enabled-themes (quote (solarized-light)))
  '(custom-safe-themes (quote ("1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" default)))
  '(default-frame-alist (quote ((height . 60) (width . 110))))
+ '(erc-nick "stask")
+ '(erc-prompt-for-password nil)
  '(ido-enable-flex-matching t)
  '(ido-mode (quote both) nil (ido))
  '(indent-tabs-mode nil)

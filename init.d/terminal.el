@@ -1,0 +1,11 @@
+(setq multi-term-program "/bin/zsh")
+(setq term-term-name "xterm-256color")
+(set-terminal-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+(add-hook 'term-mode-hook
+          (lambda ()
+            (define-key term-raw-map (kbd "C-y") 'term-paste)
+            (define-key term-raw-map (kbd "s-v") 'term-paste)
+            (define-key term-raw-map (kbd "M-<left>") 'term-send-backward-word)
+            (define-key term-raw-map (kbd "M-<right>") 'term-send-forward-word)
+            (global-unset-key (kbd "C-r"))))
