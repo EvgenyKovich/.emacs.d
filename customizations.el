@@ -18,6 +18,7 @@
  '(mark-even-if-inactive nil)
  '(markdown-command "mmd")
  '(scroll-bar-mode nil)
+ '(server-window (quote pop-to-buffer))
  '(show-paren-mode t)
  '(standard-indent 2)
  '(tab-width 2)
