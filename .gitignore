@@ -3,3 +3,4 @@
 /backup
 /eshell
 *-private.el
+nrepl-history

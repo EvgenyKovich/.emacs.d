@@ -26,6 +26,9 @@
                         (add-to-list 'custom-theme-load-path
                                      (expand-file-name "el-get/color-theme-solarized"
                                                        user-emacs-directory))))
+        (:name ac-nrepl
+               :type git
+               :url "git://github.com/purcell/ac-nrepl.git")
         (:name paredit
                :type git
                :url "git://github.com/emacsmirror/paredit.git")
@@ -68,7 +71,7 @@
 
 (setq my-packages
       (append
-       '(clojure-mode midje-mode nrepl color-theme-solarized paredit
+       '(clojure-mode midje-mode nrepl color-theme-solarized ac-nrepl paredit
                       rainbow-delimiters php-mode actionscript-mode jade-mode
                       coffee-mode markdown-mode yaml-mode sml-mode rvm magit
                       scala-mode2 elixir-mode multi-term)

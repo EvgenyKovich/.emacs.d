@@ -1,6 +1,8 @@
-(setq erc-prompt-for-nickserv-password nil)
-(add-hook 'erc-after-connect
-          '(lambda (SERVER NICK)
-             (cond
-              ((string-match "freenode\\.net" SERVER)
-               (erc-message "PRIVMSG" (concat "NickServ identify " freenode-stask-passwd))))))
+(setq erc-autojoin-channels-alist
+      '(("freenode.net" "#emacs" "#clojure" "#redis")))
+(defun stask-irc-freenode ()
+  (interactive)
+  (erc-select :server "irc.freenode.net"
+              :port 6667
+              :password freenode-stask-passwd
+              :nick "stask"))

@@ -1,12 +1,13 @@
-;; enable eldoc in clojure buffers
-(add-hook 'nrepl-interaction-mode-hook
-          'nrepl-turn-on-eldoc-mode)
-
 ;; hide *nrepl-connection* and *nrepl-server* buffers
 (setq nrepl-hide-special-buffers t)
+(setq nrepl-popup-stacktraces t)
+(setq nrepl-history-file "~/.emacs.d/nrepl-history")
 
-;; stop error buffer from popping up while working in buffers other than the REPL
-(setq nrepl-popup-stacktraces nil)
+(add-hook 'nrepl-connected-hook
+          (defun pnh-clojure-mode-eldoc-hook ()
+            (add-hook 'clojure-mode-hook 'turn-on-eldoc-mode)
+            (add-hook 'nrepl-interaction-mode-hook 'nrepl-turn-on-eldoc-mode)
+            (nrepl-enable-on-existing-clojure-buffers)))
 
 ;; enable CamelCase for editing commands (for Java)
 (add-hook 'nrepl-mode-hook 'subword-mode)
@@ -16,6 +17,11 @@
 
 ;; enable rainbow delimiters in nrepl
 (add-hook 'nrepl-mode-hook 'rainbow-delimiters-mode)
+
+;(add-hook 'nrepl-mode-hook 'ac-nrepl-setup)
+;(add-hook 'nrepl-interaction-mode-hook 'ac-nrepl-setup)
+;(eval-after-load "auto-complete"
+;  '(add-to-list 'ac-modes 'nrepl-mode))
 
 ;; add paredit to clojure-mode
 (add-hook 'clojure-mode-hook 'paredit-mode)
