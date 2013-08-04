@@ -2,6 +2,8 @@
 ;;(defun turn-on-paredit () (paredit-mode 1))
 ;;(add-hook 'clojure-mode-hook 'turn-on-paredit)
 
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+
 ;; rainbow-delimiters in all programming modes
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
@@ -13,9 +15,9 @@
 
 ;; Java
 (add-hook 'java-mode-hook (lambda ()
-	  (setq c-basic-offset 2
-	  tab-width 2
-	  indent-tab-mode nil)))
+    (setq c-basic-offset 2
+    tab-width 2
+    indent-tab-mode nil)))
 
 ;; Ruby
 (add-to-list 'auto-mode-alist '("Gemfile$" . ruby-mode))

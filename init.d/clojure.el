@@ -3,6 +3,8 @@
 (setq nrepl-popup-stacktraces t)
 (setq nrepl-history-file "~/.emacs.d/nrepl-history")
 
+(setq clojure-docstring-indent-level 3)
+
 (add-hook 'nrepl-connected-hook
           (defun pnh-clojure-mode-eldoc-hook ()
             (add-hook 'clojure-mode-hook 'turn-on-eldoc-mode)
@@ -26,6 +28,10 @@
 ;; add paredit to clojure-mode
 (add-hook 'clojure-mode-hook 'paredit-mode)
 
+;; custom macros -- indent like defun
+(add-hook 'clojure-mode-hook (lambda ()
+             (put-clojure-indent 'dbcall 'defun)))
+
 ;; Teach compile the syntax of the kibit output
 (require 'compile)
 (add-to-list 'compilation-error-regexp-alist-alist
@@ -42,3 +48,5 @@ Display the results in a hyperlinked *compilation* buffer."
 
 ;; add midje
 (add-hook 'clojure-mode-hook 'midje-mode)
+
+(setenv "MIDJE_COLORIZE" "false")

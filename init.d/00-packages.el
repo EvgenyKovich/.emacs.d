@@ -18,7 +18,7 @@
                :url "git://github.com/dnaumov/midje-mode.git")
         (:name nrepl
                :type git
-               :url "git://github.com/kingtim/nrepl.el.git")
+               :url "git@github.com:clojure-emacs/nrepl.el.git")
         (:name color-theme-solarized
                :type git
                :url "git://github.com/sellout/emacs-color-theme-solarized.git"
@@ -67,14 +67,27 @@
                :url "git://github.com/elixir-lang/emacs-elixir.git")
         (:name multi-term
                :type git
-               :url "git://github.com/emacsmirror/multi-term.git")))
+               :url "git://github.com/emacsmirror/multi-term.git")
+        (:name dash-at-point
+               :type git
+               :url "git@github.com:stanaka/dash-at-point.git")
+        (:name js2-mode
+               :type git
+               :url "git@github.com:mooz/js2-mode.git")
+        (:name rinari
+               :type git
+               :url "git@github.com:eschulte/rinari.git")
+        (:name rhtml
+               :type git
+               :url "git@github.com:eschulte/rhtml.git")))
 
 (setq my-packages
       (append
        '(clojure-mode midje-mode nrepl color-theme-solarized ac-nrepl paredit
                       rainbow-delimiters php-mode actionscript-mode jade-mode
                       coffee-mode markdown-mode yaml-mode sml-mode rvm magit
-                      scala-mode2 elixir-mode multi-term)
+                      scala-mode2 elixir-mode multi-term dash-at-point js2-mode
+                      rinari rhtml)
        (mapcar 'el-get-source-name el-get-sources)))
 
 (el-get 'sync my-packages)
