@@ -1,3 +1,0 @@
-(global-set-key "\C-cd" 'dash-at-point)
-
-(add-to-list 'dash-at-point-mode-alist '(clojure-mode . "clojure"))

@@ -1,6 +1,8 @@
-/el-get
 /auto-save-list
-/backup
+/backups
+/configuration.el
+/cider-history
+/elpa
 /eshell
-*-private.el
-nrepl-history
+/projectile-bookmarks.eld
+/recentf
