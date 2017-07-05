@@ -116,11 +116,23 @@ Uses [[https://github.com/jwiegley/use-package][use-package]] extensively.
 
    #+BEGIN_SRC emacs-lisp
      (use-package solarized-theme
-       :defer 10
+       :ensure t
        :init
        (setq solarized-use-variable-pitch nil)
-       (load-theme 'solarized-dark t)
-       :ensure t)
+       :config
+       (load-theme 'solarized-dark t))
+   #+END_SRC
+
+** Kaolin theme
+
+   [[https://github.com/0rdy/kaolin-theme][Kaolin theme]]
+
+   #+BEGIN_SRC emacs-lisp
+     ;; (use-package kaolin-theme
+     ;;   :ensure t
+     ;;   :config
+     ;;   ;;(load-theme 'kaolin t)
+     ;;   )
    #+END_SRC
 
 * Font
@@ -174,8 +186,7 @@ Uses [[https://github.com/jwiegley/use-package][use-package]] extensively.
    #+BEGIN_SRC emacs-lisp
      (use-package ace-window
        :ensure t
-       :init
-       (global-set-key [remap other-window] 'ace-window))
+       :bind (([remap other-window] . ace-window)))
    #+END_SRC
 
 * Which Key
@@ -184,7 +195,7 @@ Uses [[https://github.com/jwiegley/use-package][use-package]] extensively.
     (use-package which-key
       :ensure t
       :diminish which-key-mode
-      :init
+      :config
       (which-key-mode))
   #+END_SRC
 
@@ -194,8 +205,11 @@ Uses [[https://github.com/jwiegley/use-package][use-package]] extensively.
     (use-package org
       :pin org
       :ensure t
-      :config
+      :bind
+      (("C-c r" . org-capture))
+      :init
       (setq org-src-fontify-natively t)
+      :config
       (setq org-capture-templates
             '(("p" "pt journal entry" entry
                (file+datetree "~/org/journals/pt.org")
@@ -208,9 +222,8 @@ Uses [[https://github.com/jwiegley/use-package][use-package]] extensively.
                "* %U\n\t%?")
               ("t" "todo" entry
                (file+datetree "~/org/todo.org")
-               "* %U\n\t%?")))
-      :init
-      (define-key global-map "\C-cr" 'org-capture))
+               "* %U\n%?")))
+      (setq org-mobile-directory "~/Dropbox/Apps/MobileOrg"))
   #+END_SRC
 
 * Swiper / Ivy / Counsel
@@ -220,27 +233,28 @@ Uses [[https://github.com/jwiegley/use-package][use-package]] extensively.
   #+BEGIN_SRC emacs-lisp
     (use-package swiper
       :ensure t
-      :init
-      (global-set-key (kbd "C-s") 'swiper)
-      (global-set-key (kbd "C-r") 'swiper))
+      :bind
+      (([remap isearch-forward] . swiper)
+       ([remap isearch-backward] . swiper)))
 
     (use-package ivy
       :ensure t
       :diminish ivy-mode
+      :bind
+      (("C-x b" . ivy-switch-buffer)
+       ("C-c C-r" . ivy-resume))
       :config
       (setq ivy-use-virtual-buffers t
             ivy-display-style 'fancy)
-      :init
-      (ivy-mode 1)
-      (global-set-key (kbd "C-x b") 'ivy-switch-buffer)
-      (global-set-key (kbd "C-c C-r") 'ivy-resume))
+      (ivy-mode 1))
 
     (use-package counsel
       :ensure t
-      :init
-      (global-set-key (kbd "M-x") 'counsel-M-x)
-      (global-set-key (kbd "C-x C-f") 'counsel-find-file)
-      (define-key read-expression-map (kbd "C-r") 'counsel-expression-history))
+      :bind
+      (("M-x" . counsel-M-x)
+       ("C-x C-f" . counsel-find-file)
+       (:map read-expression-map
+             ("C-r" . counsel-expression-history))))
   #+END_SRC
 
 * Page breaks
@@ -249,8 +263,8 @@ Uses [[https://github.com/jwiegley/use-package][use-package]] extensively.
   See [[https://ericjmritz.wordpress.com/2015/08/29/using-page-breaks-in-gnu-emacs/][Using Page-Breaks in GNU Emacs]] by Eric J. M. Ritz.
 
   #+BEGIN_SRC emacs-lisp
-    (use-package page-break-lines
-      :ensure t)
+    ;; (use-package page-break-lines
+    ;;   :ensure t)
   #+END_SRC
 
 * Terminal
@@ -263,7 +277,7 @@ Uses [[https://github.com/jwiegley/use-package][use-package]] extensively.
      (use-package exec-path-from-shell
        :if (memq window-system '(mac ns))
        :ensure t
-       :init
+       :config
        (exec-path-from-shell-initialize))
    #+END_SRC
 
@@ -275,6 +289,86 @@ Uses [[https://github.com/jwiegley/use-package][use-package]] extensively.
                   (term-set-escape-char ?\C-x)))
      (defalias 'ff 'find-file)
      (defalias 'ffo 'find-file-other-window)
+
+     ;; from https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
+
+     ;; (require 'dash)
+     ;; (require 's)
+     ;; (require 'cl)
+     ;; (require 'magit)
+
+     ;; (defmacro with-face (STR &rest PROPS)
+     ;;   "Return STR propertized with PROPS."
+     ;;   `(propertize ,STR 'face (list ,@PROPS)))
+
+     ;; (defmacro esh-section (NAME ICON FORM &rest PROPS)
+     ;;   "Build eshell section NAME with ICON prepended to evaled FORM with PROPS."
+     ;;   `(setq ,NAME
+     ;;          (lambda () (when ,FORM
+     ;;                  (-> ,ICON
+     ;;                      (concat esh-section-delim ,FORM)
+     ;;                      (with-face ,@PROPS))))))
+
+     ;; (defun esh-acc (acc x)
+     ;;   "Accumulator for evaluating and concatenating esh-sections."
+     ;;   (--if-let (funcall x)
+     ;;       (if (s-blank? acc)
+     ;;           it
+     ;;         (concat acc esh-sep it))
+     ;;     acc))
+
+     ;; (defun esh-prompt-func ()
+     ;;   "Build `eshell-prompt-function'"
+     ;;   (concat esh-header
+     ;;           (-reduce-from 'esh-acc "" eshell-funcs)
+     ;;           "\n"
+     ;;           eshell-prompt-string))
+
+     ;; (esh-section esh-dir
+     ;;              "\xf07c"
+     ;;              (abbreviate-file-name (eshell/pwd))
+     ;;              '(:foreground "gold" :bold ultra-bold :underline t))
+
+     ;; (esh-section esh-git
+     ;;              "\xe907"
+     ;;              (magit-get-current-branch)
+     ;;              '(:foreground "pink"))
+
+     ;; (esh-section esh-clock
+     ;;              "\xf017"
+     ;;              (format-time-string "%H:%M" (current-time))
+     ;;              '(:foreground "forest green"))
+
+     ;; ;; Below I implement a "prompt number" section
+     ;; (setq esh-prompt-num 0)
+     ;; (add-hook 'eshell-exit-hook (lambda () (setq esh-prompt-num 0)))
+     ;; (advice-add 'eshell-send-input :before
+     ;;             (lambda (&rest args) (setq esh-prompt-num (incf esh-prompt-num))))
+
+     ;; (esh-section esh-num
+     ;;              "\xf0c9"
+     ;;              (number-to-string esh-prompt-num)
+     ;;              '(:foreground "brown"))
+
+     ;; ;; Separator between esh-sections
+     ;; (setq esh-sep "  ")
+
+     ;; ;; Separator between an esh-section icon and form
+     ;; (setq esh-section-delim " ")
+
+     ;; ;; Eshell prompt header
+     ;; (setq esh-header "\n ")
+
+     ;; ;; Eshell prompt regexp and string. Unless you are varying the prompt by eg.
+     ;; ;; your login,  these can be the same.
+     ;; (setq eshell-prompt-regexp " ")
+     ;; (setq eshell-prompt-string " ")
+
+     ;; ;; Choose which eshell-funcs to enable
+     ;; (setq eshell-funcs (list esh-dir esh-git esh-clock esh-num))
+
+     ;; ;; Enable the new eshell prompt
+     ;; (setq eshell-prompt-function 'esh-prompt-func)
    #+END_SRC
 
 ** shell-switcher
@@ -282,7 +376,7 @@ Uses [[https://github.com/jwiegley/use-package][use-package]] extensively.
    #+BEGIN_SRC emacs-lisp
      (use-package shell-switcher
        :ensure t
-       :config
+       :init
        (setq shell-switcher-mode t))
    #+END_SRC
 
@@ -291,8 +385,8 @@ Uses [[https://github.com/jwiegley/use-package][use-package]] extensively.
   #+BEGIN_SRC emacs-lisp
     (use-package expand-region
       :ensure t
-      :init
-      (global-set-key (kbd "C-=") 'er/expand-region))
+      :bind
+      (("C-=" . er/expand-region)))
   #+END_SRC
 
 * projectile
@@ -301,12 +395,38 @@ Uses [[https://github.com/jwiegley/use-package][use-package]] extensively.
     (use-package projectile
       :ensure t
       :diminish t
-      :config
+      :bind
+      (("C-c f" . projectile-find-file))
+      :init
       (setq projectile-enable-caching nil
             projectile-completion-system 'ivy)
-      :init
-      (projectile-global-mode)
-      (global-set-key (kbd "C-c f") 'projectile-find-file))
+      :config
+      (projectile-global-mode))
+  #+END_SRC
+
+** projectile-counsel
+   [[https://github.com/ericdanan/counsel-projectile][GitHub page]]
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package counsel-projectile
+       :ensure t
+       :diminish t
+       :config
+       (counsel-projectile-on))
+   #+END_SRC
+
+* spaceline
+
+  #+BEGIN_SRC emacs-lisp
+    (use-package spaceline
+      :ensure t
+      :config
+      (setq-default mode-line-format '("%e" (:eval (spaceline-ml-main)))))
+
+    (use-package spaceline-config
+      :ensure spaceline
+      :config
+      (spaceline-emacs-theme))
   #+END_SRC
 
 * magit
@@ -314,8 +434,8 @@ Uses [[https://github.com/jwiegley/use-package][use-package]] extensively.
   #+BEGIN_SRC emacs-lisp
     (use-package magit
       :ensure t
-      :init
-      (global-set-key (kbd "C-x g") 'magit-status))
+      :bind
+      (("C-x g" . magit-status)))
   #+END_SRC
 
 * paredit
@@ -325,13 +445,14 @@ Uses [[https://github.com/jwiegley/use-package][use-package]] extensively.
       :ensure t
       :diminish " λ"
       :init
-      (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)
-      (add-hook 'lisp-mode-hook #'enable-paredit-mode)
-      (add-hook 'clojure-mode-hook #'enable-paredit-mode)
-      (add-hook 'ielm-mode-hook #'enable-paredit-mode)
-      (add-hook 'slime-repl-mode-hook #'enable-paredit-mode)
-      (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
-      (add-hook 'scheme-mode-hook #'enable-paredit-mode))
+      (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
+      (add-hook 'lisp-mode-hook 'enable-paredit-mode)
+      (add-hook 'clojure-mode-hook 'enable-paredit-mode)
+      (add-hook 'cider-repl-mode-hook 'enable-paredit-mode)
+      (add-hook 'ielm-mode-hook 'enable-paredit-mode)
+      (add-hook 'slime-repl-mode-hook 'enable-paredit-mode)
+      (add-hook 'lisp-interaction-mode-hook 'enable-paredit-mode)
+      (add-hook 'scheme-mode-hook 'enable-paredit-mode))
   #+END_SRC
 
 * Programming modes
@@ -342,7 +463,7 @@ Uses [[https://github.com/jwiegley/use-package][use-package]] extensively.
      (use-package yasnippet
        :ensure t
        :diminish yas-minor-mode
-       :init
+       :config
        (yas-global-mode 1))
    #+END_SRC
 
@@ -355,7 +476,7 @@ Uses [[https://github.com/jwiegley/use-package][use-package]] extensively.
         :pin melpa-stable
         :ensure t
         :diminish (clojure-mode . "clj")
-        :init
+        :config
         (define-clojure-indent
           ;; standard stuff
           (apply 'defun)
@@ -383,21 +504,13 @@ Uses [[https://github.com/jwiegley/use-package][use-package]] extensively.
       (use-package cider
         :pin melpa-stable
         :ensure t
-        :config
+        :init
         (setq cider-repl-wrap-history t
               cider-test-show-report-on-success t
               cider-repl-history-file "~/.emacs.d/cider-history"
               cider-cljs-lein-repl "(do (use 'figwheel-sidecar.repl-api) (start-figwheel!) (cljs-repl))")
-        :init
-        (add-hook 'cider-mode-hook #'eldoc-mode))
-    #+END_SRC
-
-*** cider-eval-sexp-fu
-
-    #+BEGIN_SRC emacs-lisp
-      (use-package cider-eval-sexp-fu
-        :pin melpa-stable
-        :ensure t)
+        :config
+        (add-hook 'cider-mode-hook 'eldoc-mode))
     #+END_SRC
 
 *** clj-refactor
@@ -406,7 +519,7 @@ Uses [[https://github.com/jwiegley/use-package][use-package]] extensively.
       (use-package clj-refactor
         :pin melpa-stable
         :ensure t
-        :init
+        :config
         (add-hook 'clojure-mode-hook
                   '(lambda ()
                      (clj-refactor-mode 1)
@@ -419,7 +532,7 @@ Uses [[https://github.com/jwiegley/use-package][use-package]] extensively.
    #+BEGIN_SRC emacs-lisp
      (use-package web-mode
        :ensure t
-       :init
+       :config
        (add-to-list 'auto-mode-alist '("\\.html\\.erb$" . web-mode))
        (add-to-list 'auto-mode-alist '("\\.vm$" . web-mode))
        (add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
@@ -442,10 +555,14 @@ Uses [[https://github.com/jwiegley/use-package][use-package]] extensively.
    #+BEGIN_SRC emacs-lisp
      (use-package markdown-mode
        :ensure t
-       :config
-       (setq markdown-command "multimarkdown")
+       :commands
+       (markdown-mode gfm-mode)
+       :mode
+       (("README\\.md\\'" . gfm-mode)
+        ("\\.md\\'" . markdown-mode)
+        ("\\.markdown\\'" . markdown-mode))
        :init
-       (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode)))
+       (setq markdown-command "multimarkdown"))
    #+END_SRC
 
 ** dockerfile
@@ -459,4 +576,38 @@ Uses [[https://github.com/jwiegley/use-package][use-package]] extensively.
 
    #+BEGIN_SRC emacs-lisp
      (setq js-indent-level 2)
+   #+END_SRC
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package js2-mode
+       :ensure t
+       :mode (("\\.js$" . js2-mode))
+       :interpreter ("node" . js2-mode)
+       :config
+       (progn
+         (add-hook 'js2-mode-hook (lambda () (setq js2-basic-offset 2)))
+         (add-hook 'js2-mode-hook (lambda ()
+                                    (bind-key "M-j" 'join-line-or-lines-in-region js2-mode-map)))))
+   #+END_SRC
+
+** java
+
+   #+BEGIN_SRC emacs-lisp
+     (add-hook 'java-mode-hook (lambda ()
+                                 (setq c-basic-offset 2
+                                       tab-width 2
+                                       indent-tabs-mode nil)))
+   #+END_SRC
+
+** GraphQL
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package graphql-mode
+       :ensure t)
+   #+END_SRC
+
+** YAML
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package yaml-mode :ensure t)
    #+END_SRC
